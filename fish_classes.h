@@ -1,4 +1,4 @@
-class minnows{
+class minnow{
  public:
   int xcoord;
   int ycoord;
