@@ -3,16 +3,18 @@
 #include "fish_classes.h"
 #include "move_fish.h"
 
+//void move_tuna(tuna &t);
+
 int main(){
   
   srand(time(NULL));
-  minnow a;
-  a.xcoord=1;
-  a.ycoord=1;
-  a.zcoord=1;
-  move_minnow(a);
+  tuna a;
+  a.xcoord=0;
+  a.ycoord=0;
+  a.zcoord=0;
+  move_tuna(a);
   
-  std::cout << "Hello " << a.xcoord <<  std::endl; 
+  std::cout << "x: " << a.xcoord << " y: " << a.ycoord << " z: " << a.zcoord <<  std::endl; 
 
   return 0;
 }
