@@ -8,11 +8,11 @@
 int main(){
   
   srand(time(NULL));
-  tuna a;
+  shark a;
   a.xcoord=0;
   a.ycoord=0;
   a.zcoord=0;
-  move_tuna(a);
+  move_shark(a);
   
   std::cout << "x: " << a.xcoord << " y: " << a.ycoord << " z: " << a.zcoord <<  std::endl; 
 
