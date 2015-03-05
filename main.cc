@@ -8,13 +8,13 @@
 int main(){
   
   srand(time(NULL));
-  shark a;
-  a.xcoord=0;
-  a.ycoord=0;
-  a.zcoord=0;
-  move_shark(a);
+  shark a[2];
+  a[0].xcoord=0;
+  a[0].ycoord=0;
+  a[0].zcoord=0;
+  move_shark(a[0]);
   
-  std::cout << "x: " << a.xcoord << " y: " << a.ycoord << " z: " << a.zcoord <<  std::endl; 
+  std::cout << "x: " << a[0].xcoord << " y: " << a[0].ycoord << " z: " << a[0].zcoord <<  std::endl; 
 
   return 0;
 }
