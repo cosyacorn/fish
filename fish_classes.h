@@ -19,6 +19,8 @@ class tuna{
 
   int age;
   int eaten;
+
+  
 };
 
 class shark{

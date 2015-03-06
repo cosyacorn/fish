@@ -5,6 +5,9 @@
 
 //void move_tuna(tuna &t);
 
+void init_minnow(minnow *head, int x, int y, int z);
+void new_minnow(minnow *head, int x, int y, int z);
+
 int main(){
   
   srand(time(NULL));
@@ -13,9 +16,15 @@ int main(){
   a[0].ycoord=0;
   a[0].zcoord=0;
   move_shark(a[0]);
+  
+
+  minnow *b;
+  init_minnow(b, 1, 1, 1);
+
+  //b=new_minnow();
 
   
-  std::cout << "x: " << a[0].xcoord << " y: " << a[0].ycoord << " z: " << a[0].zcoord <<  std::endl; 
+  std::cout << "x: " << b.xcoord << " y: " << b.ycoord << " z: " << b.zcoord <<  std::endl; 
 
   return 0;
 }
