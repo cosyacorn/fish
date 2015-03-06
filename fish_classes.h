@@ -5,6 +5,10 @@ class minnow{
   int zcoord;
 
   int age;
+
+  //set up linked list
+  minnow *next;
+  minnow *prev;
 };
 
 class tuna{

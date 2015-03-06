@@ -13,6 +13,7 @@ int main(){
   a[0].ycoord=0;
   a[0].zcoord=0;
   move_shark(a[0]);
+
   
   std::cout << "x: " << a[0].xcoord << " y: " << a[0].ycoord << " z: " << a[0].zcoord <<  std::endl; 
 
