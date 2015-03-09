@@ -1,34 +1,16 @@
-class minnow{
+class fish{
  public:
+  //type specifies the fish: 0=minnow, 1=tuna, 2=shark
+  int type;
+  
   int xcoord;
   int ycoord;
   int zcoord;
 
   int age;
+  int eaten;
 
   //set up linked list
-  minnow *next;
-  minnow *prev;
-};
-
-class tuna{
- public:
-  int xcoord;
-  int ycoord;
-  int zcoord;
-
-  int age;
-  int eaten;
-
-  
-};
-
-class shark{
- public:
-  int xcoord;
-  int ycoord;
-  int zcoord;
-
-  int age;
-  int eaten;
+  fish *next;
+  fish *prev;
 };

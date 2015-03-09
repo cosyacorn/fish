@@ -1,30 +1,34 @@
 #include<iostream>
-#include<stdlib.h>
+#include<cstdlib>
 #include "fish_classes.h"
 #include "move_fish.h"
 
 //void move_tuna(tuna &t);
 
-void init_minnow(minnow *head, int x, int y, int z);
-void new_minnow(minnow *head, int x, int y, int z);
+void init_fish(fish *head, int species, int x, int y, int z);
+fish* new_fish(int species, int x, int y, int z);
+void append_fish(fish *head, int species, int x, int y, int z);
 
 int main(){
   
   srand(time(NULL));
-  shark a[2];
-  a[0].xcoord=0;
-  a[0].ycoord=0;
-  a[0].zcoord=0;
-  move_shark(a[0]);
   
+    
+  fish* head_fish;
+  head_fish = new fish;
+  init_fish(head_fish, 2, 2, 2, 2);
 
-  minnow *b;
-  init_minnow(b, 1, 1, 1);
+  //append_minnow(head_minnow, 2, 2, 2);
+  append_fish(head_fish, 3, 3, 3, 3);
+  move_fish(head_fish);
 
-  //b=new_minnow();
+  while(head_fish!=NULL){
 
-  
-  std::cout << "x: " << b.xcoord << " y: " << b.ycoord << " z: " << b.zcoord <<  std::endl; 
+    std::cout << "x: " << head_fish->xcoord << " y: " << head_fish->ycoord << " z: " << head_fish->zcoord <<  std::endl; 
+
+  head_fish=head_fish->next;
+  }
+
 
   return 0;
 }
