@@ -59,7 +59,7 @@ void arrival_shark(fish *head, int x, int y, int z){
      if(head->type==1){
        if(head->eaten==1){
 	 if(head->xcoord==x && head->ycoord==y && head->zcoord==z)
-	   num_fed_tuna++;
+	   num_fed_shark++;
 	 if(num_fed_shark>=2){
 	   append_fish(head, 2, x, y, z);
 	   break;
@@ -68,4 +68,21 @@ void arrival_shark(fish *head, int x, int y, int z){
      }
      head=head->next;
    }
+}
+
+void arrival_tuna_minnows(fish *head, int x, int y, int z){
+  
+  int minnow, tuna;
+ 
+  minnow=0;
+  tuna=0;
+
+  while(head!=NULL){
+    if(head->type==0)
+      minnow++;
+    if(head->type==1)
+      tuna++;
+
+    head=head->next;
+  }
 }
