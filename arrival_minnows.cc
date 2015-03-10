@@ -3,9 +3,11 @@
 #include<iostream>
 
 void append_fish(fish *h, int species, int x, int y, int z);
+void delete_backward(fish **fishy, int species, int x, int y, int z);
+void delete_fish(fish **head_ref, fish *del);
+
 
 void arrival_minnows(fish *head, int x, int y, int z){
-
  
   int num_minnows;
  
@@ -13,7 +15,6 @@ void arrival_minnows(fish *head, int x, int y, int z){
 
   while(head!=NULL){
     if(head->type==0){
-      std::cout << head->type << std::endl;
       if(head->xcoord==x && head->ycoord==y && head->zcoord==z)
 	num_minnows++;
       if(num_minnows>=2){
@@ -70,19 +71,44 @@ void arrival_shark(fish *head, int x, int y, int z){
    }
 }
 
-void arrival_tuna_minnows(fish *head, int x, int y, int z){
-  
-  int minnow, tuna;
+int is_tuna_minnow(fish *head, int x, int y, int z){
+   
+  int minnow, tuna, ans;
  
   minnow=0;
   tuna=0;
+  ans=0;
 
   while(head!=NULL){
-    if(head->type==0)
-      minnow++;
-    if(head->type==1)
-      tuna++;
-
+    if(head->xcoord==x && head->ycoord==y && head->zcoord==z){
+      if(head->type==0)
+	minnow++;
+      if(head->type==1)
+	tuna++;
+    }
+    if(minnow!=0 && tuna !=0){
+      ans=1;
+      break;
+    }
     head=head->next;
+  }
+  std::cout << ans << std::endl;
+  return ans;
+}
+
+void arrival_tuna_minnows(fish *head, int x, int y, int z){
+
+  int del;
+  del = is_tuna_minnow(head, x, y, z);
+
+  if(del!=0){
+    while(head!=NULL){
+      std::cout << del << std::endl;
+      if(head->type==0){
+	delete_fish(&head, head);
+	head=head->prev;
+      }
+      head=head->next;
+    }
   }
 }

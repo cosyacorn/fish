@@ -65,31 +65,48 @@ void delete_fish(fish **head_ref, fish *del){
   return;
 }
 
-void delete_forward(fish *fishy, int species){
+void delete_forward(fish *fishy, int species, int x, int y, int z){
 
   while(fishy!=NULL){
-    if(fishy->type==species){
-      delete_fish(&fishy, fishy);
-	}
+    if(fishy->xcoord==x && fishy->ycoord==y && fishy->zcoord==z){
+      if(fishy->type==species){
+	delete_fish(&fishy, fishy);
+	fishy=fishy->prev;
+      }
+    }
     fishy=fishy->next;
   }
 }
 
-void delete_backward(fish *fishy, int species){
+void delete_backward(fish *fishy, int species, int x, int y, int z){
 
+  //fishy=fishy->prev;
   while(fishy!=NULL){
-    if(fishy->type==species){
-      delete_fish(&fishy, fishy);
+    if(fishy->xcoord==x && fishy->ycoord==y && fishy->zcoord==z){
+      if(fishy->type==species){
+	delete_fish(&fishy, fishy);
+	fishy=fishy->next;
+      }
     }
+    std::cout << "hello" << std::endl;
     fishy=fishy->prev;
   }
+}
+
+void delete_species(fish *fishy, int species, int x, int y, int z){
+
+  //delete_backward(fishy, species, x, y, z);
+  std::cout <<"hello"<<std::endl;
+  delete_forward(fishy, species, x, y, z);
+  //delete_backward(fishy, species, x, y, z);
+
 }
 
 
 void print_fish(fish *head){
 
   while(head!=NULL){
-    std::cout << "x: " << head->xcoord << " y: " << head->ycoord << " z: " << head->zcoord <<  std::endl; 
+    std::cout << "type " << head->type << " x: " << head->xcoord << " y: " << head->ycoord << " z: " << head->zcoord <<  std::endl; 
 
     head=head->next;
   }
