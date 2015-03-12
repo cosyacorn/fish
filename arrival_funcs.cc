@@ -141,7 +141,7 @@ void arrival_tuna_shark(fish **head, int x, int y, int z){
   
   while(cur!=NULL && cur->next!=NULL){
     if(cur->xcoord==x && cur->ycoord==y && cur->zcoord==z){
-      if(cur->type==1){
+      if(cur->type==1 && del_flag==0){
 	temp=cur->next;
 	prev->next=cur->next;
 	delete cur;
@@ -152,10 +152,8 @@ void arrival_tuna_shark(fish **head, int x, int y, int z){
 	cur->eaten++;
       }
     }
-    if(cur->type!=1){
-      cur=cur->next;
-      prev=prev->next;
-    }
+    cur=cur->next;
+    prev=prev->next;  
   }
 
   if(cur!=NULL){
@@ -189,11 +187,15 @@ void arrival_tuna_shark(fish **head, int x, int y, int z){
   }
 }
 
+
+
 void feeding_frenzy(fish **head, int x, int y, int z){
 
   fish *cur, *prev, *temp;
+  int del_flag;
 
   cur=*head;
+  del_flag=0;
 
   if(cur==NULL) return;
 
@@ -201,15 +203,17 @@ void feeding_frenzy(fish **head, int x, int y, int z){
   cur=cur->next;
   
   while(cur!=NULL && cur->next!=NULL){
+    del_flag=0;
     if(cur->xcoord==x || cur->xcoord==(x+1)%5 || cur->xcoord==(x-1+5)%5){
       if(cur->ycoord==y || cur->ycoord==(y+1)%5 || cur->ycoord==(y-1+5)%5){
 	if(cur->zcoord==z || cur->zcoord==(z+1)%5 || cur->zcoord==(z-1+5)%5){
 	  if(cur->type==0){
+	    std::cout<<cur->type<<std::endl;
 	    temp=cur->next;
 	    prev->next=cur->next;
 	    delete cur;
+	    del_flag=1;
 	    cur=temp;
-	    //cur=cur->prev;
 	  }
 	}
       }
@@ -219,7 +223,7 @@ void feeding_frenzy(fish **head, int x, int y, int z){
 	cur->eaten++;
       }
     }
-    if(cur->type!=0){
+    if(cur->type!=0 || del_flag==0){
       cur=cur->next;
       prev=prev->next;
     }
@@ -259,3 +263,96 @@ void feeding_frenzy(fish **head, int x, int y, int z){
     }
   }
 }
+
+
+
+void choose_arrival_func(fish **head, int x, int y, int z){
+
+  int minnows, fed_tuna, fed_sharks, tuna, shark, tuna_minnows, tuna_shark, frenzy;
+  int opt[6], tot, i;
+  double prob[6], r;
+  fish *cur;
+
+  cur=*head;
+
+  minnows=fed_tuna=fed_sharks=tuna=shark=tuna_minnows=tuna_shark=frenzy=0;
+  for(i=0;i<6;i++)
+    opt[i]=0;
+  tot=0;
+
+  while(cur!=NULL){
+    if(cur->xcoord==x && cur->ycoord==y && cur->zcoord==z){
+      if(cur->type==0)
+	minnows++;
+      if(cur->type==1){
+	tuna++;
+	  if(cur->eaten!=0){
+	    fed_tuna++;
+	  }
+      }
+      if(cur->type==2){
+	shark++;
+	if(cur->eaten!=0){
+	  fed_sharks++;
+	}
+      }
+      if(tuna>=1 && shark>=0)
+	tuna_shark++;
+    }
+    cur=cur->next;
+  }
+  if(tuna==1 && minnows>=1)
+    tuna_minnows++;
+  if(shark==1 && minnows!=0)
+    frenzy++;
+
+  if(minnows>=2)
+    opt[0]=1;
+  if(fed_tuna>=2)
+    opt[1]=1;
+  if(fed_sharks>=2)
+    opt[2]=1;
+  if(tuna_minnows!=0)
+    opt[3]=1;
+  if(tuna_shark!=0)
+    opt[4]=1;
+  if(frenzy>=1)
+    opt[5]=1;
+
+
+  for(i=0;i<6;i++)
+    tot+=opt[i];
+
+
+  prob[0]=((double)opt[0])/((double)tot);
+
+  for(i=1;i<6;i++)
+    prob[i]=prob[i-1]+((double)opt[i])/((double)tot);
+
+  for(i=0;i<6;i++)
+    std::cout<<prob[i]<<std::endl;
+
+  r=drand48();
+
+  std::cout<<r<<std::endl;
+  
+  if(r<prob[0])
+    arrival_minnows(*head, x, y, y);
+
+  else if(r>=prob[0] && r<prob[1])
+    arrival_tuna(*head, x, y, z);
+
+  else if(r>=prob[1] && r<prob[2])
+    arrival_shark(*head, x, y, z);
+
+  else if(r>=prob[2] && r<prob[3])
+    arrival_tuna_minnows(head, x, y, z);
+
+  else if(r>=prob[3] && r<prob[4])
+    arrival_tuna_shark(head, x, y, z);
+
+  else if(r>=prob[4] && r<prob[5])
+    feeding_frenzy(head, x, y, z);
+}
+
+//void choose_arrival_func
