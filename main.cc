@@ -19,10 +19,12 @@ int main(){
   fish* head_fish;
   head_fish = new fish;
   init_fish(head_fish, 1, 2, 2, 2);
-  //append_fish(head_fish, 1, 0, 0, 0);
+  head_fish->eaten=1;
+  //append_fish(head_fish, 2, 0, 0, 0);
   //append_fish(head_fish, 0, 2, 2, 2);
-  append_fish(head_fish, 0, 2, 2, 2);
-  append_fish(head_fish, 0, 2, 2, 2);
+  append_fish(head_fish, 1, 2, 2, 2);
+  (head_fish->next)->eaten=1;
+  //append_fish(head_fish, 2, 2, 2, 2);
   
 
   print_fish(head_fish);
@@ -32,7 +34,7 @@ int main(){
   std::cout<<std::endl;
   print_fish(head_fish);
 
-  std::cout<<head_fish->eaten<<std::endl;
+  //std::cout<<head_fish->eaten<<std::endl;
   
 
 
