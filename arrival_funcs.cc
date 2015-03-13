@@ -55,7 +55,7 @@ void arrival_shark(fish *head, int x, int y, int z){
   num_fed_shark=0;
 
    while(head!=NULL){
-     if(head->type==1){
+     if(head->type==2){
        if(head->eaten!=0){
 	 if(head->xcoord==x && head->ycoord==y && head->zcoord==z)
 	   num_fed_shark++;

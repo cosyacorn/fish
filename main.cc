@@ -18,11 +18,11 @@ int main(){
     
   fish* head_fish;
   head_fish = new fish;
-  init_fish(head_fish, 1, 2, 2, 2);
+  init_fish(head_fish, 2, 2, 2, 2);
   head_fish->eaten=1;
   //append_fish(head_fish, 2, 0, 0, 0);
-  //append_fish(head_fish, 0, 2, 2, 2);
-  append_fish(head_fish, 1, 2, 2, 2);
+  append_fish(head_fish, 2, 2, 2, 2);
+  append_fish(head_fish, 2, 2, 2, 2);
   (head_fish->next)->eaten=1;
   //append_fish(head_fish, 2, 2, 2, 2);
   
