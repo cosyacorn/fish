@@ -11,28 +11,55 @@ void print_fish(fish *head);
 void choose_arrival_func(fish **head, int x, int y, int z);
 
 int main(){
-  
+
   srand(time(NULL));
   srand48(time(NULL));
   
     
-  fish* head_fish;
-  head_fish = new fish;
-  init_fish(head_fish, 2, 2, 2, 2);
-  head_fish->eaten=1;
-  //append_fish(head_fish, 2, 0, 0, 0);
-  append_fish(head_fish, 2, 2, 2, 2);
-  append_fish(head_fish, 2, 2, 2, 2);
-  (head_fish->next)->eaten=1;
-  //append_fish(head_fish, 2, 2, 2, 2);
-  
+  fish* head;
+  int n_minnows, n_tuna, n_sharks, i;
+  int min_flag, tuna_flag, shark_flag;
 
-  print_fish(head_fish);
+  head = new fish;
+
+  n_minnows=5;
+  n_tuna=5;
+  n_sharks=2;
+  min_flag=tuna_flag=shark_flag=0;
+
+  if(n_minnows!=0){
+    init_fish(head, 0, rand()%5, rand()%5, rand()%5);
+    min_flag=1;
+  }
+  else if(n_tuna!=0){
+    init_fish(head, 1, rand()%5, rand()%5, rand()%5);
+    tuna_flag=1;
+  }
+  else if(n_sharks!=0){
+    init_fish(head, 2, rand()%5, rand()%5, rand()%5);
+    shark_flag=1;
+  }
+  else{
+    std::cout<<"Error: No fish in initial conditions"<<std::endl;
+    return 1;
+  }
+
+  for(i=0;i<(n_minnows-min_flag);i++)
+    append_fish(head, 0, rand()%5, rand()%5, rand()%5);
+
+  for(i=0;i<(n_tuna-tuna_flag);i++)
+    append_fish(head, 1, rand()%5, rand()%5, rand()%5);
+
+  for(i=0;i<(n_sharks-shark_flag);i++)
+    append_fish(head, 2, rand()%5, rand()%5, rand()%5);
+
+
+  print_fish(head);
   
+  move_fish(head);
   
-  choose_arrival_func(&head_fish, 2, 2, 2);
   std::cout<<std::endl;
-  print_fish(head_fish);
+  print_fish(head);
 
   //std::cout<<head_fish->eaten<<std::endl;
   

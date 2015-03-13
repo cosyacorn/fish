@@ -68,6 +68,7 @@ void move_fish(fish *f){
     f->ycoord=(5+f->ycoord+(int)pow(-1,x))%5;
     f->zcoord=(5+f->zcoord+(int)pow(-1,y))%5;
     }
+    f->age++;
   }
 
   /////////////
@@ -133,5 +134,6 @@ void move_fish(fish *f){
 	f->xcoord=(5+f->xcoord+y*dist2)%5;
       }
     }
+    f->age++;
   }
 }

@@ -18,6 +18,7 @@ void arrival_minnows(fish *head, int x, int y, int z){
       if(num_minnows>=2){
 	append_fish(head, 0, x, y, z);
 	append_fish(head, 0, x, y, z);
+	append_fish(head, 0, x, y, z);
 	break;
       }
     }
@@ -263,6 +264,53 @@ void feeding_frenzy(fish **head, int x, int y, int z){
 }
 
 
+void not_eaten_five_moves(fish **head){
+
+  fish *cur, *prev, *temp;
+  int del_flag;
+  
+  cur=*head;
+
+  if(cur==NULL) return;
+
+  prev=cur;
+  cur=cur->next;
+
+  while(cur!=NULL && cur->next!=NULL){
+    del_flag=0;
+    if(cur->age>=5 && cur->eaten==0){
+      if(cur->type==1 ||cur->type==2){
+	temp=cur->next;
+	prev->next=cur->next;
+	delete cur;
+	cur=temp;
+	del_flag=1;
+      }
+    }
+    if(del_flag==0)
+      cur=cur->next;
+  }
+  
+  if(cur!=NULL){
+    if(cur->age>=5 && cur->eaten==0){
+      if(cur->type == 1 || cur->type==2){
+	prev->next = NULL;
+	delete cur;	 
+      }
+    }
+  }
+  if((*head)->age>=5 && (*head)->eaten==0){
+    if((*head)->type==1 || (*head)->type==2){
+      temp = (*head)->next;
+      delete *head;
+      *head = temp;
+    }
+  }
+}
+
+
+
+
 
 void choose_arrival_func(fish **head, int x, int y, int z){
 
@@ -270,6 +318,8 @@ void choose_arrival_func(fish **head, int x, int y, int z){
   int opt[6], tot, i;
   double prob[6], r;
   fish *cur;
+
+  not_eaten_five_moves(head);
 
   cur=*head;
 
