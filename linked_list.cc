@@ -40,9 +40,14 @@ fish* new_fish(int species, int x, int y, int z){
 
 void append_fish(fish *h, int species, int x, int y, int z){
   while(h->next != NULL){
+    if(species==0 && (h->next)->type==1)
+      break;
+    if(species==1 && (h->next)->type==2)
+      break;
     h=h->next;
   }
   fish *f = new_fish(species, x, y, z);
+  f->next=h->next;
   h->next=f;
   //f->prev=h;
 }
@@ -55,4 +60,26 @@ void print_fish(fish *head){
 
     head=head->next;
   }
+}
+
+int * count_fish(fish * head){
+
+  int min, tuna, shark, num[3];
+
+  min=tuna=shark=0;
+
+  while(head!=NULL){
+    if(head->type==0)
+      min++;
+    if(head->type==1)
+      tuna++;
+    if(head->type==2)
+      shark++;
+    head=head->next;
+  }
+  num[0]=min;
+  num[1]=tuna;
+  num[2]=shark;
+
+  return num;
 }

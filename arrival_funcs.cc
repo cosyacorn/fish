@@ -319,7 +319,7 @@ void choose_arrival_func(fish **head, int x, int y, int z){
   double prob[6], r;
   fish *cur;
 
-  not_eaten_five_moves(head);
+  not_eaten_five_moves(head);//check if a tuna or shark has eaten and its age
 
   cur=*head;
 

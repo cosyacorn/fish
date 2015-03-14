@@ -9,6 +9,8 @@ fish* new_fish(int species, int x, int y, int z);
 void append_fish(fish *head, int species, int x, int y, int z);
 void print_fish(fish *head);
 void choose_arrival_func(fish **head, int x, int y, int z);
+void move_fish(fish *f);
+void update(fish **head, int num_minnows, int num_tuna, int num_sharks);
 
 int main(){
 
@@ -22,8 +24,8 @@ int main(){
 
   head = new fish;
 
-  n_minnows=5;
-  n_tuna=5;
+  n_minnows=3;
+  n_tuna=3;
   n_sharks=2;
   min_flag=tuna_flag=shark_flag=0;
 
@@ -53,10 +55,11 @@ int main(){
   for(i=0;i<(n_sharks-shark_flag);i++)
     append_fish(head, 2, rand()%5, rand()%5, rand()%5);
 
+  append_fish(head, 0, 0, 1, 3);
 
   print_fish(head);
   
-  move_fish(head);
+  update(&head, n_minnows, n_tuna, n_sharks);
   
   std::cout<<std::endl;
   print_fish(head);
