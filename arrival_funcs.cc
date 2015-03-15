@@ -425,53 +425,54 @@ void choose_arrival_func(fish **head, int x, int y, int z){
 
   if(minnows>=2)//can apply arrival minnows
     opt[0]=1;
-  if(fed_tuna>=2)//can apply fed
+  if(fed_tuna>=2)//can apply fed tuna function
     opt[1]=1;
-  if(fed_sharks>=2)
+  if(fed_sharks>=2)//can apply fed shark alg
     opt[2]=1;
-  if(tuna_minnows!=0)
+  if(tuna_minnows!=0)//can apply function to eat minnows/feed tuna
     opt[3]=1;
-  if(tuna_shark!=0)
+  if(tuna_shark!=0)//can apply fn to eat 1 tuna + feed sharks
     opt[4]=1;
-  if(frenzy>=1)
+  if(frenzy>=1)//can apply fn to eat all nn mins + feed shark
     opt[5]=1;
 
 
-  for(i=0;i<6;i++)
+  for(i=0;i<6;i++)//find the total num of possible outcomes
     tot+=opt[i];
 
 
-  prob[0]=((double)opt[0])/((double)tot);
+  prob[0]=((double)opt[0])/((double)tot);//get the probability of outcome 0
 
   for(i=1;i<6;i++)
-    prob[i]=prob[i-1]+((double)opt[i])/((double)tot);
+    prob[i]=prob[i-1]+((double)opt[i])/((double)tot);//get the prob of all other outcomes
 
 
-  r=drand48();
+  r=drand48();//pick random number
   
+  //apply correct fn based on random number outcome
   if(r<prob[0]){
-    std::cout<<"minnows"<<std::endl;
+    //std::cout<<"minnows"<<std::endl;
     arrival_minnows(*head, x, y, y);
   }
 
   else if(r>=prob[0] && r<prob[1]){
-    std::cout<<"tuna"<<std::endl;
+    //std::cout<<"tuna"<<std::endl;
     arrival_tuna(*head, x, y, z);
   }
   else if(r>=prob[1] && r<prob[2]){
-    std::cout<<"shark"<<std::endl;
+    //std::cout<<"shark"<<std::endl;
     arrival_shark(*head, x, y, z);
   }
   else if(r>=prob[2] && r<prob[3]){
-    std::cout<<"minnows and tuna"<<std::endl;
+    //std::cout<<"minnows and tuna"<<std::endl;
     arrival_tuna_minnows(head, x, y, z);
   }
   else if(r>=prob[3] && r<prob[4]){
-    std::cout<<"tuna and shark"<<std::endl;
+    //std::cout<<"tuna and shark"<<std::endl;
     arrival_tuna_shark(head, x, y, z);
   }
   else if(r>=prob[4] && r<prob[5]){
-     std::cout<<"nom nom nom"<<std::endl;
+    //std::cout<<"nom nom nom"<<std::endl;
     feeding_frenzy(head, x, y, z);
   }
 }

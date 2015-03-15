@@ -12,5 +12,5 @@ class fish{
 
   //set up linked list
   fish *next;
-  fish *prev;
+  
 };

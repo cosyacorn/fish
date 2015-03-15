@@ -1,0 +1,1 @@
+So my code doesn't really work too well. It doesn't run to give any results. I've commented it all as best i could to explain what i've done. I've spent ages on it and in the end just got very furstrated with it :( so this is what i'm submitting.. sorry it'll probably be a pain to read through and correct.

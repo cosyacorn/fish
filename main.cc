@@ -1,21 +1,17 @@
 #include<iostream>
 #include<cstdlib>
 #include "fish_classes.h"
-#include "move_fish.h"
 
 
 void init_fish(fish *head, int species, int x, int y, int z);
-fish* new_fish(int species, int x, int y, int z);
 void append_fish(fish *head, int species, int x, int y, int z);
-void print_fish(fish *head);
-void choose_arrival_func(fish **head, int x, int y, int z);
-void move_fish(fish *f);
 void update(fish **head, int num_minnows, int num_tuna, int num_sharks);
 void count_fish(fish * head, int &n_min, int &n_tuna, int &n_shark);
 
 
 int main(){
 
+  //seed rngs
   srand(time(NULL));
   srand48(time(NULL));
   
@@ -26,8 +22,9 @@ int main(){
 
   head = new fish;
 
-  n_minnows=3000;
-  n_tuna=300;
+  //set initial populations
+  n_minnows=300;
+  n_tuna=30;
   n_sharks=5;
   min_flag=tuna_flag=shark_flag=0;
 
@@ -57,9 +54,6 @@ int main(){
   for(i=0;i<(n_sharks-shark_flag);i++)
     append_fish(head, 2, rand()%5, rand()%5, rand()%5);
 
-  //append_fish(head, 0, 0, 1, 3);
-
-  //print_fish(head);
   count_fish(head, n_minnows, n_tuna, n_sharks);
   std::cout<<"minnows: "<<n_minnows<<" tuna: "<<n_tuna<<" sharks: "<<n_sharks<<std::endl;
   
@@ -71,13 +65,6 @@ int main(){
     count_fish(head, n_minnows, n_tuna, n_sharks);
     std::cout<<"minnows: "<<n_minnows<<" tuna: "<<n_tuna<<" sharks: "<<n_sharks<<std::endl;
   }
-
-  //std::cout<<std::endl;
-  //print_fish(head);
-
-  //std::cout<<head_fish->eaten<<std::endl;
-  
-
 
   return 0;
 }
