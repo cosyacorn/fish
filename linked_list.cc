@@ -2,7 +2,7 @@
 #include<cstdlib>
 #include<iostream>
 
-
+//Function to initalise the head node in our linked list of fish
 void init_fish(fish *head, int species, int x, int y, int z){
 
   head->type=species;
@@ -18,9 +18,13 @@ void init_fish(fish *head, int species, int x, int y, int z){
   //head->prev=NULL;
 }
 
+
+//Function for creating a new fish (of class fish)
 fish* new_fish(int species, int x, int y, int z){
 
   fish *f=new fish;
+
+  //set up the various entries in the fish class
 
   f->next=NULL;
   //f->prev=NULL;
@@ -38,10 +42,16 @@ fish* new_fish(int species, int x, int y, int z){
   
 }
 
+//Function to add elements to the linked list.
+//want all the minnows to be grouped together at the start of the list.
+//Then the tuna, then the sharks
+
 void append_fish(fish *h, int species, int x, int y, int z){
   while(h->next != NULL){
+    //minnows first
     if(species==0 && (h->next)->type==1)
       break;
+    //then tuna
     if(species==1 && (h->next)->type==2)
       break;
     h=h->next;
@@ -53,6 +63,7 @@ void append_fish(fish *h, int species, int x, int y, int z){
 }
 
 
+//Function to print out all the fish in the linked list
 void print_fish(fish *head){
 
   while(head!=NULL){
@@ -62,9 +73,10 @@ void print_fish(fish *head){
   }
 }
 
-int * count_fish(fish * head){
+//function to count the population of each species
+void count_fish(fish * head, int &n_min, int &n_tuna, int &n_shark){
 
-  int min, tuna, shark, num[3];
+  int min, tuna, shark;
 
   min=tuna=shark=0;
 
@@ -77,9 +89,7 @@ int * count_fish(fish * head){
       shark++;
     head=head->next;
   }
-  num[0]=min;
-  num[1]=tuna;
-  num[2]=shark;
-
-  return num;
+  n_min=min;
+  n_tuna=tuna;
+  n_shark=shark;
 }

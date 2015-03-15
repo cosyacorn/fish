@@ -11,6 +11,8 @@ void print_fish(fish *head);
 void choose_arrival_func(fish **head, int x, int y, int z);
 void move_fish(fish *f);
 void update(fish **head, int num_minnows, int num_tuna, int num_sharks);
+void count_fish(fish * head, int &n_min, int &n_tuna, int &n_shark);
+
 
 int main(){
 
@@ -19,14 +21,14 @@ int main(){
   
     
   fish* head;
-  int n_minnows, n_tuna, n_sharks, i;
+  int n_minnows, n_tuna, n_sharks, i,j;
   int min_flag, tuna_flag, shark_flag;
 
   head = new fish;
 
-  n_minnows=3;
-  n_tuna=3;
-  n_sharks=2;
+  n_minnows=3000;
+  n_tuna=300;
+  n_sharks=5;
   min_flag=tuna_flag=shark_flag=0;
 
   if(n_minnows!=0){
@@ -55,14 +57,23 @@ int main(){
   for(i=0;i<(n_sharks-shark_flag);i++)
     append_fish(head, 2, rand()%5, rand()%5, rand()%5);
 
-  append_fish(head, 0, 0, 1, 3);
+  //append_fish(head, 0, 0, 1, 3);
 
-  print_fish(head);
+  //print_fish(head);
+  count_fish(head, n_minnows, n_tuna, n_sharks);
+  std::cout<<"minnows: "<<n_minnows<<" tuna: "<<n_tuna<<" sharks: "<<n_sharks<<std::endl;
   
-  update(&head, n_minnows, n_tuna, n_sharks);
-  
-  std::cout<<std::endl;
-  print_fish(head);
+
+  for(j=0;j<1000;j++){
+    for(i=0;i<125;i++){
+      update(&head, n_minnows, n_tuna, n_sharks);
+    }
+    count_fish(head, n_minnows, n_tuna, n_sharks);
+    std::cout<<"minnows: "<<n_minnows<<" tuna: "<<n_tuna<<" sharks: "<<n_sharks<<std::endl;
+  }
+
+  //std::cout<<std::endl;
+  //print_fish(head);
 
   //std::cout<<head_fish->eaten<<std::endl;
   

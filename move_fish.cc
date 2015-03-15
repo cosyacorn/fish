@@ -12,16 +12,19 @@ void move_fish(fish *f){
 
     int axis;
     int direction;
-
+    
+    //randomly choose the x, y or z axis to move on
     axis=rand()%3;
+    //randomly choose +ve or -ve direction
     direction=rand()%2;
 
+    //update the coordinates accordingly
     if(axis==0){
       if(direction==1){
 	f->xcoord=(f->xcoord+1)%5;
       }
       else{
-	f->xcoord=(f->xcoord-1+5)%5;
+	f->xcoord=(f->xcoord-1+5)%5;//need +5 for modular arithmetic
       }
     }
     else if(axis==1){
@@ -48,11 +51,20 @@ void move_fish(fish *f){
 
   if(f->type==1){
     int plane, x, y;
-
+    
+    //randomly choose xy, xz or yz plane
     plane=rand()%3;
+    //need two random nos to determine direction
     x=rand()%2;
     y=rand()%2;
     
+    //tuna die if move 5 times without eating. this is checked elsewhere in code
+    //this just resets it eaten/age status if it is still alive after moving 5times
+    if(f->age>=5){
+      f->age=0;
+      f->eaten=0;
+    }
+
     //movement in xy plane
     if(plane==0){
       f->xcoord=(5+f->xcoord+(int)pow(-1,x))%5;
@@ -85,6 +97,13 @@ void move_fish(fish *f){
     //how far to go on first part of movemnet (1 or 2 places)
     dist=1+(rand()%2);
   
+
+    //same criteria as for tuna
+    if(f->age>=5){
+      f->age=0;
+      f->eaten=0;
+    }
+
     //if fist move is 1 then second is 2 places and vice versa
     if(dist==1){
       dist2=2;
